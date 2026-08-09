@@ -13,7 +13,7 @@ import (
 	_ "github.com/tang980129/goat/internal/database/mysql" // 注册 MySQL 驱动
 )
 
-// connectCmd 是 connect 子命令，提供交互式 SQL 终端。
+// connectCmd 是 goat 子命令，提供交互式 SQL 终端。
 var connectCmd = &cobra.Command{
 	Use:   "connect <别名>",
 	Short: "连接数据库并进入交互式 SQL 终端",
@@ -117,10 +117,4 @@ func runConnect(cmd *cobra.Command, args []string) error {
 		return fmt.Errorf("输入读取错误: %w", err)
 	}
 	return nil
-}
-
-// isQuery 简单判断 SQL 是否为查询语句（以 SELECT 开头）。
-func isQuery(sql string) bool {
-	t := strings.TrimSpace(sql)
-	return len(t) >= 6 && strings.EqualFold(t[:6], "SELECT")
 }
